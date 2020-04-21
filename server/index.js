@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3003;
+const port = 3000;
 const morgan = require('morgan');
 const path = require('path');
 const db = require('../db.js');
