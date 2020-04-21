@@ -58,12 +58,12 @@ class Reviews extends React.Component {
   }
 
   searchHandler() {
-    let searchArr = this.state.reviews.slice();
+    let reviews = this.state.reviews.slice();
     let tempArr = [];
-    for (let i = 0; i < searchArr.length; i++) {
-      const reviewText = searchArr[i].body.toLowerCase();
-      if (reviewText.includes(this.state.searchInput)) {
-        tempArr.push(searchArr[i]);
+    for (let i = 0; i < reviews.length; i++) {
+      const reviewText = reviews[i].body.toLowerCase();
+      if (reviewText.includes(this.state.searchInput.toLowerCase())) {
+        tempArr.push(reviews[i]);
       }
     }
     this.setState({
@@ -73,18 +73,20 @@ class Reviews extends React.Component {
   }
 
   paginate(reviews) {
-    let result = [];
+    let paginatedReviews = [];
     let page = [];
     for (let i = 0; i < reviews.length; i += 7) {
       for (let j = 0; j < this.state.reviewsPerPage; j++) {
-        page.push(reviews[j + i]);
+        if (reviews[j + i]) {
+          page.push(reviews[j + i]);
+        }
       }
-      result.push(page);
+      paginatedReviews.push(page);
       page = [];
     }
     this.setState({
       reviews: reviews,
-      paginatedReviews: result
+      paginatedReviews: paginatedReviews
     });
   }
 
@@ -115,19 +117,19 @@ class Reviews extends React.Component {
 
   setRatings() {
     const reviews = this.state.reviews;
-    const dataSet = [ 'clean_rating', 'social_rating', 'comfort_rating', 'location_rating', 'service_rating', 'sleep_rating' ];
-    const ratingState = [ 'cleanRating', 'socialRating', 'comfortRating', 'locationRating', 'serviceRating', 'sleepRating' ];
+    const ratingNamesFromDB = [ 'clean_rating', 'social_rating', 'comfort_rating', 'location_rating', 'service_rating', 'sleep_rating' ];
+    const ratingStateNames = [ 'cleanRating', 'socialRating', 'comfortRating', 'locationRating', 'serviceRating', 'sleepRating' ];
     let totalAverage = 0;
-    dataSet.forEach((rating, index ) => {
+    ratingNamesFromDB.forEach((rating, index ) => {
       let sum = 0;
       reviews.forEach(review => {
         sum += review[rating];
       });
-      let average = (sum / rating.length / 5);
+      let average = (sum / rating.length / 10);
       totalAverage += average;
       average = average.toFixed(1);
       this.setState({
-        [ ratingState[index] ]: average
+        [ ratingStateNames[index] ]: average
       });
     });
     totalAverage = totalAverage / 6;
@@ -136,14 +138,13 @@ class Reviews extends React.Component {
       totalAverageRating: totalAverage
     });
   }
-  // console.log('average: ', totalAverage)
 
   addGraph() {
     const graph = this.state;
-    const dataSet = [graph.cleanRating, graph.socialRating, graph.comfortRating, graph.locationRating, graph.serviceRating, graph.sleepRating ];
+    const ratingsState = [ graph.cleanRating, graph.socialRating, graph.comfortRating, graph.locationRating, graph.serviceRating, graph.sleepRating ];
 
     d3.select('.GraphContainer').selectAll('.Rating')
-      .data(dataSet)
+      .data(ratingsState)
       .append('svg')
       .style('background', 'lightgrey')
       .style('border-radius', '5px')
@@ -173,6 +174,12 @@ class Reviews extends React.Component {
 
     let currReviews = this.state.paginatedReviews[this.state.currentPage] || [];
 
+    let reviews = currReviews.length === 0 ? <h3 style={{ 'text-align': 'center'}}>No search results</h3> : currReviews.map(review => {
+      return <Review
+        key={review.id}
+        review={review} />;
+    });
+
     return (
       <>
         <div className="ReviewBody">
@@ -186,11 +193,7 @@ class Reviews extends React.Component {
               searchHandler={this.searchHandler}
               totalAverageRating={this.state.totalAverageRating}
             />
-            {currReviews.map(review => {
-              return <Review
-                key={review.id}
-                review={review} />;
-            })}
+            { reviews }
             <Pagination
               reviews={this.state.reviews}
               reviewsPerPage={this.state.reviewsPerPage}
