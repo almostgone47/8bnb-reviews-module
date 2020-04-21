@@ -8,8 +8,8 @@ const db = require('../db.js');
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/reviews', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   db.getReviews((err, data) => {
     if (err) {
       res.status(400).send();
