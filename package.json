@@ -9,9 +9,9 @@
   },
   "scripts": {
     "migrate": "mysql -u root -p < schema.sql",
-    "start": "webpack-dev-server --open --config webpack.dev.js & node ./server/index.js",
+    "start": "node ./server/index.js",
     "start-dev": "webpack-dev-server --open",
-    "build": "webpack --config webpack.prod.js",
+    "build": "webpack --watch",
     "seed": "node seed.js",
     "test": "jest --watch"
   },

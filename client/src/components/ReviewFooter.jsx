@@ -1,6 +1,6 @@
 import React from 'react';
 import Pagination from './Pagination.jsx';
-import './styles/Review.css';
+import '../styles/Review.css';
 
 const ReviewFooter = (props) => {
   return (

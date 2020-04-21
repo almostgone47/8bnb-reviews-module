@@ -1,13 +1,22 @@
-.review-body {
+#reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px 75px;
+}
+
+body {
   padding: 0;
   font-size: 16px;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
   color: rgb(72, 72, 72);
-  width: 700px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .Reviews {
   font-size: 24px;
+  margin-top: 0;
 }
 
 .ReviewNum {
