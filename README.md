@@ -7,11 +7,11 @@
 1. [Usage](#Usage)
 
 To run app:[Development](#development)
-// 1. Install node modules: npm install
-// 2. Create DB: npm run migrate
-// 3. Seed DB: npm run seed
-// 4. Start server & bundle: npm start
-// navigate to localhost:3000
+- 1. Install node modules: npm install
+- 2. Create DB: npm run migrate
+- 3. Seed DB: npm run seed
+- 4. Start server & bundle: npm start
+- navigate to localhost:3000
 
 ## Usage
 
