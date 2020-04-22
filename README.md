@@ -1,24 +1,17 @@
 # Project Name
 
-> Project description
-
-## Related Projects
-
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+> Ratings and Reviews Module
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-To run app:
-// 1. npm run migrate to create db
-// 2. npm start install all modules, seed the db and start the nodemon server
-// 3. in another terminal npm run start-dev
+
+To run app:[Development](#development)
+// 1. Install node modules: npm install
+// 2. Create DB: npm run migrate
+// 3. Seed DB: npm run seed
+// 4. Start server & bundle: npm start
 // navigate to localhost:3000
-1. [Requirements](#requirements)
-1. [Development](#development)
 
 ## Usage
 
